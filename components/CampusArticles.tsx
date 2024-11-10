@@ -75,21 +75,14 @@ const CampusStories: React.FC = () => {
 
     const router = useRouter();
     const navigation = useNavigation();
-
-    
-    // change header back button... it used to say (tabs), ntot sure if this is a temp fix
-    useEffect(() => {
-      navigation.setOptions({
-        title: post_data.title,  
-        headerBackTitle: "Back",   
-      });
-    }, [navigation, post_data.title]);  
+  
 
     if (loading) return <Text>Loading...</Text>;
     if (error) return <Text>Error: {error.message}</Text>;
 
     const posts = data?.category?.posts?.nodes || [];
 
+    
     return (
         <View>
             <View style={styles.titleContainer}>
