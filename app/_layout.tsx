@@ -14,6 +14,8 @@ export default function RootLayout() {
   const colorScheme = useColorScheme();
   const [loaded] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+    PlayfairDisplayRegular: require('../assets/fonts/PlayfairDisplay-Regular.ttf'),
+    PlayfairDisplayBold: require('../assets/fonts/PlayfairDisplay-Bold.ttf')
   });
 
   useEffect(() => {

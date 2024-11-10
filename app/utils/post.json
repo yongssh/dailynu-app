@@ -1,0 +1,87 @@
+""" query {
+  posts(first: 1) {
+    nodes {
+      id
+      title
+      content
+      excerpt
+      date
+      slug
+      author {
+        node {
+          name
+        }
+      }
+      featuredImage {
+        node {
+          sourceUrl
+          altText
+        }
+      }
+      categories {
+        nodes {
+          name
+        }
+      }
+      tags {
+        nodes {
+          name
+        }
+      }
+      link
+    }
+  }
+}
+"""
+{
+    "data": {
+      "posts": {
+        "nodes": [
+          {
+            "id": "cG9zdDoyOTM4Njk=",
+            "title": "Northwestern Intercampus Shuttle hit by bullet on way to Chicago",
+            "content": "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\" \"http://www.w3.org/TR/REC-html40/loose.dtd\">\n<html><body><div class=\"mailmunch-forms-before-post\" style=\"display: none !important;\"></div><p><span style=\"font-weight: 400\">A Northwestern Intercampus Shuttle was struck by a bullet Friday evening on its way to downtown Chicago.</span></p>\n<p><span style=\"font-weight: 400\">The bus was just a few blocks away from the Sheridan and Loyola stop when gunfire reportedly shattered the driver&rsquo;s side of the window shortly after 6 p.m. No one was physically injured.&nbsp;</span></p>\n<p><span style=\"font-weight: 400\">Police and emergency vehicles soon arrived on the scene. By 6:39 p.m., passengers were given the option to get on a new shuttle to continue down to Chicago.</span></p>\n<p><span style=\"font-weight: 400\">The University Police and Chicago Police Department did not immediately respond to requests for comment.</span></p>\n<p><i><span style=\"font-weight: 400\">This is a developing story and will be updated as more information becomes available.</span></i></p>\n<p><b>Email:</b><span style=\"font-weight: 400\"> jerrywu2027@u.northwestern.edu&nbsp;</span></p><div class=\"mailmunch-forms-in-post-middle\" style=\"display: none !important;\"></div>\n<p><b>X:</b> <a href=\"https://twitter.com/Jerrwu\"><span style=\"font-weight: 400\">@Jerrwu</span></a></p>\n<p><b>Related Stories&nbsp;</b></p>\n<p><span style=\"font-weight: 400\">&mdash; </span><a href=\"https://dailynorthwestern.com/2024/10/14/lateststories/alertnu-to-test-emergency-notification-system-wednesday/\"><span style=\"font-weight: 400\">AlertNU to test emergency notification system Wednesday</span></a></p>\n<p><span style=\"font-weight: 400\">&mdash; </span><a href=\"https://dailynorthwestern.com/2023/04/30/campus/northwestern-provides-emergency-communication-updates-following-clark-street-beach-shooting/\"><span style=\"font-weight: 400\">Northwestern provides emergency communication updates following Clark Street Beach shooting</span></a></p>\n<p><span style=\"font-weight: 400\">&mdash; </span><a href=\"https://dailynorthwestern.com/2023/04/14/campus/student-petition-demands-nu-reform-emergency-protocols-in-wake-of-evanston-shooting/\"><span style=\"font-weight: 400\">Student petition demands NU reform emergency protocols in wake of Evanston shooting</span></a></p>\n<div class=\"mailmunch-forms-after-post\" style=\"display: none !important;\"></div></body></html>\n",
+            "excerpt": "<p>A Northwestern Intercampus Shuttle was struck by a bullet Friday evening on its way to downtown Chicago. The bus was just a few blocks away from the Sheridan and Loyola stop when gunfire reportedly shattered the driver&rsquo;s side of the window shortly after 6 p.m. No one was physically injured.&nbsp; Police and emergency vehicles soon&#8230;</p>\n",
+            "date": "2024-11-09T00:48:40",
+            "slug": "northwestern-intercampus-shuttle-hit-by-bullet-on-way-to-chicago",
+            "author": {
+              "node": {
+                "name": "campus"
+              }
+            },
+            "featuredImage": {
+              "node": {
+                "sourceUrl": "https://dailynorthwestern.com/wp-content/uploads/2024/11/NUPD-min-1200x801-1.jpg",
+                "altText": ""
+              }
+            },
+            "categories": {
+              "nodes": [
+                {
+                  "name": "Campus"
+                },
+                {
+                  "name": "Campus Safety"
+                },
+                {
+                  "name": "Latest Stories"
+                }
+              ]
+            },
+            "tags": {
+              "nodes": []
+            },
+            "link": "https://dailynorthwestern.com/2024/11/09/campus/northwestern-intercampus-shuttle-hit-by-bullet-on-way-to-chicago/"
+          }
+        ]
+      }
+    },
+    "extensions": {
+      "debug": [
+        {
+          "type": "DEBUG_LOGS_INACTIVE",
+          "message": "GraphQL Debug logging is not active. To see debug logs, GRAPHQL_DEBUG must be enabled."
+        }
+      ]
+    }
+  }
