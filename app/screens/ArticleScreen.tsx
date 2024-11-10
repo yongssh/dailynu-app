@@ -51,17 +51,15 @@ const ArticleScreen: React.FC = () => {
       return text.replace(/<[^>]*>/g, '');
     }
 
+    // strip HTML tags 
     function cleanTextContent(text: string): string {
       let cleaned = decode(text);
       cleaned = stripHTMLTags(cleaned);
       return cleaned;
     }
-
-
-    // Strip HTML tags and preserve paragraph breaks
     const cleanText = cleanTextContent(post_data.content);
   
-    // Split the text into paragraphs based on two newlines
+    // split the text into paragraphs based on two newlines
     const paragraphs = cleanText.split('\n\n');
     
     return (

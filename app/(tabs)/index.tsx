@@ -5,6 +5,9 @@ import NewsArticle from '@/components/NewsArticleTest';
 import NewsArticleList from '@/components/NewsArticleList';
 import { ApolloProvider, InMemoryCache, ApolloClient } from "@apollo/client";
 import LatestArticle from '@/components/LatestArticles';
+
+import TopStories from '@/components/TopStories';
+import { ScrollView } from 'react-native-gesture-handler';
 const client = new ApolloClient({
   uri: "https://dailynorthwestern.com/graphql",   
   cache: new InMemoryCache(),
@@ -15,6 +18,7 @@ export default function HomeScreen() {
   return (
     <ApolloProvider client={client}>
     <SafeAreaView style={styles.mainContainer}>
+      {/* <ScrollView> */}
     <View style={styles.headerContainer}>
       <SvgUri
           width="80%"
@@ -24,10 +28,10 @@ export default function HomeScreen() {
           uri="https://dailynorthwestern.com/wp-content/uploads/2022/09/desktop-outlines2.svg"
       />
     </View>
-    {/* <Text style={styles.latestTitle}>Latest</Text> */}
-    {/* <NewsArticle/> */}
-  < NewsArticleList/>
-  {/* <LatestArticle/> */}
+
+    < NewsArticleList/>
+    {/* <TopStories/> */}
+    {/* </ScrollView> */}
     </SafeAreaView>
     </ApolloProvider>
   );

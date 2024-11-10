@@ -1,3 +1,17 @@
+# Documentation
+
+Index.tsx is the home screen.
+- NewsArticleList.tsx is the current component featured here. It requests from the WPGraphQL and returns the latest stories 
+
+__layout.tsx contains the different tabs: 
+ - currently, we have the "index"(Home), "search"(Search), "explore"(Explore).
+
+search.tsx lists the different Daily sections
+
+
+
+
+
 # Welcome to your Expo app 👋
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
