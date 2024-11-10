@@ -7,9 +7,9 @@ import { decode } from "html-entities";
 import {Link, useNavigation, useRouter} from "expo-router";
 import ArticleScreen from "@/app/screens/ArticleScreen";
 
-const GET_TOP_STORIES = gql`
-  query GetFrontPagePosts {
-    category(id: "Top Stories", idType: NAME) {
+const GET_CAMPUS_STORIES = gql`
+  query GetCampusPosts {
+    category(id: "Campus", idType: NAME) {
       posts {
         nodes {
           id
@@ -27,6 +27,16 @@ const GET_TOP_STORIES = gql`
             node {
               sourceUrl
               altText
+            }
+          }
+          categories {
+            nodes {
+              name
+            }
+          }
+          tags {
+            nodes {
+              name
             }
           }
           link
@@ -59,8 +69,8 @@ function cleanTextContent(text: string): string {
     return cleaned;
 }
 
-const TopStories: React.FC = () => {
-    const { data, loading, error } = useQuery( GET_TOP_STORIES);
+const CampusStories: React.FC = () => {
+    const { data, loading, error } = useQuery(GET_CAMPUS_STORIES);
     //   const navigation = useNavigation();
 
     const router = useRouter();
@@ -75,7 +85,7 @@ const TopStories: React.FC = () => {
     return (
         <View>
             <View style={styles.titleContainer}>
-                <Text style={styles.title}> TOP STORIES</Text>
+                <Text style={styles.title}> CAMPUS</Text>
                 </View> 
         <View style={styles.container}>
             {posts.length > 0 ? (
@@ -176,4 +186,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TopStories;
+export default CampusStories;

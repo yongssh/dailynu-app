@@ -42,6 +42,14 @@ const GET_CATEGORY_POSTS = gql`
   }
 `;
 
+function formatDate(dateString: string): string {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+}
 // remove HTML tags
 function stripHTMLTags(text: string): string {
   return text.replace(/<[^>]*>/g, '');
@@ -82,7 +90,7 @@ const LatestArticle: React.FC = () => {
               {post.author?.node?.name && (
                 <Text style={styles.author}>By {post.author.node.name}</Text>
               )}
-              <Text style={styles.date}>{post.date}</Text>
+              <Text style={styles.date}>{formatDate(post.date)}</Text>
 
               {/* Article Excerpt */}
               <Text style={styles.excerpt}>{cleanTextContent(post.excerpt)}</Text>

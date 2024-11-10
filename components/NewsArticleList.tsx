@@ -7,6 +7,7 @@ import { decode } from "html-entities";
 import {Link, useNavigation, useRouter} from "expo-router";
 import ArticleScreen from "@/app/screens/ArticleScreen";
 
+
 const GET_FRONT_PAGE_POSTS = gql`
   query GetFrontPagePosts {
     category(id: "Latest Stories", idType: NAME) {
@@ -36,6 +37,15 @@ const GET_FRONT_PAGE_POSTS = gql`
   }
 `;
 
+function formatDate(dateString: string): string {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+}
+
 function stripHTMLTags(text: string): string {
 
     // replace <br> with new line
@@ -63,8 +73,11 @@ const NewsArticleList: React.FC = () => {
     const posts = data?.category?.posts?.nodes || [];
 
     return (
-        <ScrollView>
-        <SafeAreaView style={styles.container}>
+        <View>
+            <View style={styles.titleContainer}>
+                <Text style={styles.title}> LATEST STORIES</Text>
+                </View> 
+            <View style={styles.container}>
             {posts.length > 0 ? (
             posts.map((post: any) => (
                 <TouchableOpacity
@@ -90,10 +103,10 @@ const NewsArticleList: React.FC = () => {
                 
                 {/* //TODO: find way to actually get author -- RSS feed? on WP side? */}
                 {/* Article Section */}
-                <Text style={styles.author}>{post.author?.node?.name || "Unknown Author"}</Text>
+                {/* <Text style={styles.author}>{post.author?.node?.name || "Unknown Author"}</Text> */}
 
                 {/* Article Date */}
-                <Text style={styles.date}>{post.date}</Text>
+                <Text style={styles.date}>{formatDate(post.date)}</Text>
 
                 {/* Article Excerpt */}
                 <Text style={styles.excerpt}>{cleanTextContent(post.excerpt)}</Text>
@@ -102,8 +115,8 @@ const NewsArticleList: React.FC = () => {
             ) : (
             <Text>No articles found</Text>
             )}
-        </SafeAreaView>
-        </ScrollView>
+        </View>
+        </View>
     );
 };
 
@@ -119,11 +132,23 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     fontFamily: "Playfair-Display",
   },
+
+  titleContainer:{
+    shadowColor: "FAFAFA",
+    borderWidth: 0.5,
+    borderRadius: 10,
+    borderColor: "#501e4c",
+    justifyContent: "center",
+    margin: 10,
+    position: "relative",
+  },
   title: {
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 8,
     fontFamily: "Playfair-Display-Bold",
+    justifyContent: "center",
+    alignSelf: "center",
   },
   author: {
     fontSize: 16,

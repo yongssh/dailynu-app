@@ -1,12 +1,8 @@
 import React from 'react';
 import { View, Text, StyleSheet, SafeAreaView} from 'react-native';
 import { SvgUri } from 'react-native-svg';
-import NewsArticle from '@/components/NewsArticleTest';
-import NewsArticleList from '@/components/NewsArticleList';
 import { ApolloProvider, InMemoryCache, ApolloClient } from "@apollo/client";
-import LatestArticle from '@/components/LatestArticles';
-
-import TopStories from '@/components/TopStories';
+import CityStories from '@/components/CityArticles';
 import { ScrollView } from 'react-native';
 
 // this is the link to the Daily's GraphQL endpoint
@@ -17,7 +13,7 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-export default function HomeScreen() {
+export default function CityScreen() {
 
   return (
     // wrap in apolloprovider
@@ -34,8 +30,7 @@ export default function HomeScreen() {
         />
       </View>
     <ScrollView>
-    <TopStories/>
-    < NewsArticleList/>
+   <CityStories/>
 
     </ScrollView>
     </SafeAreaView>

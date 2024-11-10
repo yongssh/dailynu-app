@@ -8,7 +8,10 @@ __layout.tsx contains the different tabs:
 
 search.tsx lists the different Daily sections
 
-
+## TODO: 
+- get links to article photos & display
+- figure out how to access contributor names
+- cut off article text before contributor contact info
 
 
 

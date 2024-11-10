@@ -1,41 +1,69 @@
 import {TouchableOpacity, View,  StyleSheet, Image, Platform, Text} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import {Link, useNavigation, useRouter} from "expo-router";
 
 export default function SearchScreen() {
+
+
+  const router = useRouter();
+  const navigation = useNavigation();
   return (
    <SafeAreaView >
     <View style={styles.mainContainer}> 
 
-    <TouchableOpacity style={styles.categoryContainer}>
+    <TouchableOpacity style={styles.categoryContainer} 
+
+      onPress={() => router.push({
+          // path to the ArticleScreen bc in same folder
+          pathname: '/screens/CampusScreen',  
+      })}>
     <Text style={styles.dailyIntro}>CAMPUS</Text>
     </TouchableOpacity>
 
-    <TouchableOpacity style={styles.categoryContainer}>
-    <Text style={styles.dailyIntro}>CITY</Text>
+    <TouchableOpacity style={styles.categoryContainer} 
+
+      onPress={() => router.push({
+          // path to the ArticleScreen bc in same folder
+          pathname: '/screens/CityScreen',  
+      })}>
+      <Text style={styles.dailyIntro}>CITY</Text>
     </TouchableOpacity>
 
-    <TouchableOpacity style={styles.categoryContainer}>
-    <Text style={styles.dailyIntro}>OPINION</Text>
+    <TouchableOpacity style={styles.categoryContainer} 
+
+      onPress={() => router.push({
+          // path to the ArticleScreen bc in same folder
+          pathname: '/screens/OpinionScreen',  
+      })}>
+      <Text style={styles.dailyIntro}>OPINION</Text>
     </TouchableOpacity>
 
-    <TouchableOpacity style={styles.categoryContainer}>
-    <Text style={styles.dailyIntro}>IN FOCUS</Text>
+    <TouchableOpacity style={styles.categoryContainer} 
+
+      onPress={() => router.push({
+          // path to the ArticleScreen bc in same folder
+          pathname: '/screens/IFScreen',  
+      })}>
+      <Text style={styles.dailyIntro}>IN FOCUS</Text>
     </TouchableOpacity>
 
-    <TouchableOpacity style={styles.categoryContainer}>
-    <Text style={styles.dailyIntro}>OPINION</Text>
+
+    <TouchableOpacity style={styles.categoryContainer} 
+
+      onPress={() => router.push({
+          // path to the ArticleScreen bc in same folder
+          pathname: '/screens/AEScreen',  
+      })}>
+      <Text style={styles.dailyIntro}>A&E</Text>
     </TouchableOpacity>
 
-    <TouchableOpacity style={styles.categoryContainer}>
-    <Text style={styles.dailyIntro}>A&E</Text>
-    </TouchableOpacity>
+    <TouchableOpacity style={styles.categoryContainer} 
 
-    <TouchableOpacity style={styles.categoryContainer}>
-    <Text style={styles.dailyIntro}>SPORTS</Text>
-    </TouchableOpacity>
-    
-    <TouchableOpacity style={styles.categoryContainer}>
-    <Text style={styles.dailyIntro}>GAMES</Text>
+      onPress={() => router.push({
+          // path to the ArticleScreen bc in same folder
+          pathname: '/screens/SportsScreen',  
+      })}>
+      <Text style={styles.dailyIntro}>SPORTS</Text>
     </TouchableOpacity>
 
     </View>

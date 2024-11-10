@@ -7,9 +7,9 @@ import { decode } from "html-entities";
 import {Link, useNavigation, useRouter} from "expo-router";
 import ArticleScreen from "@/app/screens/ArticleScreen";
 
-const GET_TOP_STORIES = gql`
-  query GetFrontPagePosts {
-    category(id: "Top Stories", idType: NAME) {
+const GET_SPORTS_STORIES = gql`
+  query GetSportsPosts {
+    category(id: "Sports", idType: NAME) {
       posts {
         nodes {
           id
@@ -29,22 +29,22 @@ const GET_TOP_STORIES = gql`
               altText
             }
           }
+          categories {
+            nodes {
+              name
+            }
+          }
+          tags {
+            nodes {
+              name
+            }
+          }
           link
         }
       }
     }
   }
 `;
-
-
-function formatDate(dateString: string): string {
-  const date = new Date(dateString);
-  return date.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
-}
 
 function stripHTMLTags(text: string): string {
 
@@ -59,8 +59,8 @@ function cleanTextContent(text: string): string {
     return cleaned;
 }
 
-const TopStories: React.FC = () => {
-    const { data, loading, error } = useQuery( GET_TOP_STORIES);
+const SportsStories: React.FC = () => {
+    const { data, loading, error } = useQuery(GET_SPORTS_STORIES);
     //   const navigation = useNavigation();
 
     const router = useRouter();
@@ -75,7 +75,7 @@ const TopStories: React.FC = () => {
     return (
         <View>
             <View style={styles.titleContainer}>
-                <Text style={styles.title}> TOP STORIES</Text>
+                <Text style={styles.title}>Sports</Text>
                 </View> 
         <View style={styles.container}>
             {posts.length > 0 ? (
@@ -106,7 +106,7 @@ const TopStories: React.FC = () => {
                 {/* <Text style={styles.author}>{post.author?.node?.name || "Unknown Author"}</Text> */}
 
                 {/* Article Date */}
-                <Text style={styles.date}>{formatDate(post.date)}</Text>
+                <Text style={styles.date}>{post.date}</Text>
 
                 {/* Article Excerpt */}
                 <Text style={styles.excerpt}>{cleanTextContent(post.excerpt)}</Text>
@@ -176,4 +176,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TopStories;
+export default SportsStories;

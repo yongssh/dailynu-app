@@ -7,9 +7,9 @@ import { decode } from "html-entities";
 import {Link, useNavigation, useRouter} from "expo-router";
 import ArticleScreen from "@/app/screens/ArticleScreen";
 
-const GET_TOP_STORIES = gql`
-  query GetFrontPagePosts {
-    category(id: "Top Stories", idType: NAME) {
+const GET_OPINION_STORIES = gql`
+  query GetOpinionPosts {
+    category(id: "Opinion", idType: NAME) {
       posts {
         nodes {
           id
@@ -29,13 +29,22 @@ const GET_TOP_STORIES = gql`
               altText
             }
           }
+          categories {
+            nodes {
+              name
+            }
+          }
+          tags {
+            nodes {
+              name
+            }
+          }
           link
         }
       }
     }
   }
 `;
-
 
 function formatDate(dateString: string): string {
   const date = new Date(dateString);
@@ -45,7 +54,6 @@ function formatDate(dateString: string): string {
     day: 'numeric',
   });
 }
-
 function stripHTMLTags(text: string): string {
 
     // replace <br> with new line
@@ -59,8 +67,8 @@ function cleanTextContent(text: string): string {
     return cleaned;
 }
 
-const TopStories: React.FC = () => {
-    const { data, loading, error } = useQuery( GET_TOP_STORIES);
+const OpinionStories: React.FC = () => {
+    const { data, loading, error } = useQuery(GET_OPINION_STORIES);
     //   const navigation = useNavigation();
 
     const router = useRouter();
@@ -75,7 +83,7 @@ const TopStories: React.FC = () => {
     return (
         <View>
             <View style={styles.titleContainer}>
-                <Text style={styles.title}> TOP STORIES</Text>
+                <Text style={styles.title}> CITY</Text>
                 </View> 
         <View style={styles.container}>
             {posts.length > 0 ? (
@@ -176,4 +184,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TopStories;
+export default OpinionStories;
