@@ -3,8 +3,9 @@ import React from "react";
 import { View, Text, Image, StyleSheet, Linking, SafeAreaView, TouchableOpacity, ScrollView } from "react-native";
 import { useQuery, gql } from "@apollo/client";
 import { decode } from "html-entities";
-import { useNavigation } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack";
+// import { useNavigation } from "@react-navigation/native";
+import {Link, useNavigation, useRouter} from "expo-router";
+import ArticleScreen from "@/app/screens/ArticleScreen";
 
 const GET_FRONT_PAGE_POSTS = gql`
   query GetFrontPagePosts {
@@ -36,64 +37,74 @@ const GET_FRONT_PAGE_POSTS = gql`
 `;
 
 function stripHTMLTags(text: string): string {
-  return text.replace(/<[^>]*>/g, '');
+
+    // replace <br> with new line
+    text = text.replace(/<br\s*\/?>/gi, '\n');
+    return text.replace(/<[^>]*>/g, '');
 }
 
 function cleanTextContent(text: string): string {
-  let cleaned = decode(text);
-  cleaned = stripHTMLTags(cleaned);
-  return cleaned;
+    let cleaned = decode(text);
+    cleaned = stripHTMLTags(cleaned);
+    return cleaned;
 }
 
-type RootStackParamList = {
-  'Full Article': { post: any };
-};
-
-type NavigationProp = StackNavigationProp<RootStackParamList, 'Full Article'>;
-
 const NewsArticleList: React.FC = () => {
-  const { data, loading, error } = useQuery(GET_FRONT_PAGE_POSTS);
-  const navigation = useNavigation();
+    const { data, loading, error } = useQuery(GET_FRONT_PAGE_POSTS);
+    //   const navigation = useNavigation();
 
-  if (loading) return <Text>Loading...</Text>;
-  if (error) return <Text>Error: {error.message}</Text>;
+    const router = useRouter();
+    const navigation = useNavigation();
 
-  const posts = data?.category?.posts?.nodes || [];
 
-  
-  return (
-    <ScrollView>
-      <SafeAreaView style={styles.container}>
-        {posts.length > 0 ? (
-          posts.map((post: any) => (
-            <TouchableOpacity
-              key={post.id}
-             
-              onPress={() => {
-                console.log("Navigating to Full Article with post:", post);
-                navigation.navigate('Article Screen', { post });
-              }}
-              
-              style={styles.articleContainer}
+    if (loading) return <Text>Loading...</Text>;
+    if (error) return <Text>Error: {error.message}</Text>;
+
+    const posts = data?.category?.posts?.nodes || [];
+
+    return (
+        <ScrollView>
+        <SafeAreaView style={styles.container}>
+            {posts.length > 0 ? (
+            posts.map((post: any) => (
+                <TouchableOpacity
+                key={post.id}
+                onPress={() => router.push({
+                    // path to the ArticleScreen bc in same folder
+                    pathname: '/screens/ArticleScreen',  
+
+                    // pass the post data as query params
+                    params: { post: JSON.stringify(post) },  
+                })}
+                style={styles.articleContainer}
             >
-              {post.featuredImage?.node?.sourceUrl && (
+                {post.featuredImage?.node?.sourceUrl && (
                 <Image
-                  source={{ uri: post.featuredImage.node.sourceUrl }}
-                  style={styles.image}
+                    source={{ uri: post.featuredImage.node.sourceUrl }}
+                    style={styles.image}
                 />
-              )}
-              <Text style={styles.title}>{cleanTextContent(post.title)}</Text>
-              <Text style={styles.author}>By {post.author?.node?.name || "Unknown Author"}</Text>
-              <Text style={styles.date}>{post.date}</Text>
-              <Text style={styles.excerpt}>{cleanTextContent(post.excerpt)}</Text>
-            </TouchableOpacity>
-          ))
-        ) : (
-          <Text>No articles found</Text>
-        )}
-      </SafeAreaView>
-    </ScrollView>
-  );
+                )}
+
+                {/* Article Title */}
+                <Text style={styles.title}>{cleanTextContent(post.title)}</Text>
+                
+                {/* //TODO: find way to actually get author -- RSS feed? on WP side? */}
+                {/* Article Section */}
+                <Text style={styles.author}>{post.author?.node?.name || "Unknown Author"}</Text>
+
+                {/* Article Date */}
+                <Text style={styles.date}>{post.date}</Text>
+
+                {/* Article Excerpt */}
+                <Text style={styles.excerpt}>{cleanTextContent(post.excerpt)}</Text>
+                </TouchableOpacity>
+            ))
+            ) : (
+            <Text>No articles found</Text>
+            )}
+        </SafeAreaView>
+        </ScrollView>
+    );
 };
 
 const styles = StyleSheet.create({
@@ -102,34 +113,41 @@ const styles = StyleSheet.create({
     padding: 16,
     alignSelf: "center",
     width: "90%",
+    fontFamily: "Playfair-Display",
   },
   articleContainer: {
     marginBottom: 20,
+    fontFamily: "Playfair-Display",
   },
   title: {
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 8,
+    fontFamily: "Playfair-Display-Bold",
   },
   author: {
     fontSize: 16,
     color: "gray",
     marginBottom: 12,
+    fontFamily: "Playfair-Display",
   },
   date: {
     fontSize: 16,
     color: "gray",
     marginBottom: 12,
+    fontFamily: "Playfair-Display",
   },
   excerpt: {
     fontSize: 16,
     marginBottom: 16,
+    fontFamily: "Playfair-Display",
   },
   image: {
     width: "100%",
     height: 200,
     marginBottom: 16,
     resizeMode: "contain",
+    
   },
 });
 

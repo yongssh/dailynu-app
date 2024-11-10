@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
+import { Link, View, Text, Image, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
 import { useQuery, gql } from "@apollo/client";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -39,11 +39,6 @@ function stripHTMLTags(text: string): string {
 }
 
 
-type RootStackParamList = {
-  HomeScreen: undefined;
-  ArticleScreen: { post: any };
-};
-
 const HomeScreen: React.FC = () => {
   const { data, loading, error } = useQuery(GET_FRONT_PAGE_POSTS);
   const navigation = useNavigation<HomeScreenNavigationProp>();
@@ -59,11 +54,8 @@ const HomeScreen: React.FC = () => {
        <Text>Welcome to the Home Screen</Text>;
 
         {posts.map((post: any) => (
-          <TouchableOpacity
-            key={post.id}
-            style={styles.articleContainer}
-            onPress={() => navigation.navigate("ArticleScreen", { post })}
-          >
+          <TouchableOpacity>
+            <Link href="/ArticleScreen">
             {post.featuredImage?.node?.sourceUrl && (
               <Image
                 source={{ uri: post.featuredImage.node.sourceUrl }}
@@ -74,6 +66,7 @@ const HomeScreen: React.FC = () => {
             <Text style={styles.author}>By {post.author?.node?.name || "Unknown Author"}</Text>
             <Text style={styles.date}>{post.date}</Text>
             <Text style={styles.excerpt}>{stripHTMLTags(decode(post.excerpt))}</Text>
+            </Link>
           </TouchableOpacity>
         ))}
       </View>
@@ -85,28 +78,36 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
+    fontFamily: "Playfair-Display",
   },
   articleContainer: {
     marginBottom: 20,
+    fontFamily: "Playfair-Display",
+
   },
   title: {
     fontSize: 20,
     fontWeight: "bold",
     marginBottom: 4,
+    fontFamily: "Playfair-Display-Bold",
+
   },
   author: {
     fontSize: 14,
     color: "gray",
     marginBottom: 8,
+    fontFamily: "Playfair-Display",
   },
   date: {
     fontSize: 12,
     color: "gray",
     marginBottom: 8,
+    fontFamily: "Playfair-Display",
   },
   excerpt: {
     fontSize: 16,
     marginBottom: 8,
+    fontFamily: "Playfair-Display",
   },
   image: {
     width: "100%",

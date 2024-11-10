@@ -4,14 +4,14 @@ import { RouteProp, useRoute } from "@react-navigation/native";
 
 
 const ArticleScreen: React.FC<{ route: any }> = ({ route }) => {
-  const { post } = route.params; // Access the post passed as a parameter
+  const { post } = route.params;  
   return (
     <SafeAreaView>
       <ScrollView>
         <Text>{post.title}</Text>
         <Image source={{ uri: post.featuredImage?.node?.sourceUrl }} style={{ width: '100%', height: 200 }} />
         <Text>{post.excerpt}</Text>
-        {/* Display other article content */}
+        
       </ScrollView>
     </SafeAreaView>
   );

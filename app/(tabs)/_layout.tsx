@@ -1,5 +1,8 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
+import { useFonts } from 'expo-font';
+
+import EvilIcons from '@expo/vector-icons/EvilIcons';
 
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 import { Colors } from '@/constants/Colors';
@@ -7,6 +10,14 @@ import { useColorScheme } from '@/hooks/useColorScheme';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
+
+  const [fontsLoaded] = useFonts({
+    'Playfair-Display': require('@/assets/fonts/PlayfairDisplay-Regular.ttf'),
+    'Playfair-Display-Bold': require('@/assets/fonts/PlayfairDisplay-Bold.ttf'),
+
+  });
+
+  
 
   return (
     <Tabs
@@ -23,6 +34,15 @@ export default function TabLayout() {
           ),
         }}
       />
+       <Tabs.Screen
+        name="search"
+        options={{
+          title: 'Search',
+          tabBarIcon: ({ color, focused }) => (
+            <EvilIcons name="search" size={24} color="black" />)
+        }}
+      />
+    
       <Tabs.Screen
         name="explore"
         options={{
@@ -32,6 +52,6 @@ export default function TabLayout() {
           ),
         }}
       />
-    </Tabs>
+     </Tabs>
   );
 }

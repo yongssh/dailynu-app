@@ -75,7 +75,7 @@ const NewsArticle: React.FC = () => {
     <SafeAreaView style={styles.container}>
       {post ? (
         
-        // Whole "card" links to actual article
+        // whole "card" links to actual article
         <TouchableOpacity onPress={() => Linking.openURL(post.link)}>
         
         {/* Article Image */}
