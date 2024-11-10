@@ -1,8 +1,10 @@
 import React from 'react';
 import { View, Text, StyleSheet, SafeAreaView} from 'react-native';
 import { SvgUri } from 'react-native-svg';
+// import NewsArticle from '@/components/NewsArticleTest';
+import NewsArticleList from '@/components/LatestArticles';
 import { ApolloProvider, InMemoryCache, ApolloClient } from "@apollo/client";
-import CampusArticles from '@/components/CampusArticles';
+import TopStories from '@/components/TopStories';
 import { ScrollView } from 'react-native';
 
 // this is the link to the Daily's GraphQL endpoint
@@ -13,15 +15,25 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-export default function CampusScreen() {
+export default function HomeScreen() {
 
   return (
     // wrap in apolloprovider
     <ApolloProvider client={client}>
     <SafeAreaView style={styles.mainContainer}>
-
+      
+      <View style={styles.headerContainer}>
+        <SvgUri
+            width="80%"
+            height="100%"
+            fill="#501e4c"
+            style={styles.dailyLogo}
+            uri="https://dailynorthwestern.com/wp-content/uploads/2022/09/desktop-outlines2.svg"
+        />
+      </View>
     <ScrollView>
-   <CampusArticles/>
+    <TopStories/>
+    < NewsArticleList/>
 
     </ScrollView>
     </SafeAreaView>
@@ -40,7 +52,7 @@ const styles = StyleSheet.create({
     top: 0,
     height: 80,
     width: "100%",
-    color: "#501e4c",
+  
     alignContent: "center",
     justifyContent:"center",
   

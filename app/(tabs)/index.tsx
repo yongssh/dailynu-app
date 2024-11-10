@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Text, StyleSheet, SafeAreaView} from 'react-native';
 import { SvgUri } from 'react-native-svg';
-import NewsArticle from '@/components/NewsArticleTest';
-import NewsArticleList from '@/components/NewsArticleList';
+import NewsArticle from '@/components/deprecated/NewsArticleTest';
+import NewsArticleList from '@/components/LatestArticles';
 import { ApolloProvider, InMemoryCache, ApolloClient } from "@apollo/client";
-import LatestArticle from '@/components/LatestArticles';
+import LatestArticle from '@/components/deprecated/LatestArticlesOLD';
 
 import TopStories from '@/components/TopStories';
 import { ScrollView } from 'react-native';
@@ -48,13 +48,15 @@ const styles = StyleSheet.create({
     flex: 1,
     height: "100%",
     width: "100%",
+    backgroundColor: "#FFFFF",
+
 
   },
   headerContainer:{
     top: 0,
     height: 80,
     width: "100%",
-  
+    backgroundColor: "#FFFFF",
     alignContent: "center",
     justifyContent:"center",
   

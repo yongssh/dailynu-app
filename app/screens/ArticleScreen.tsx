@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { View, Text, Image, StyleSheet, ScrollView } from 'react-native';
-import { useRoute, RouteProp } from '@react-navigation/native';
+import { useRoute, RouteProp, useNavigation } from '@react-navigation/native';
 import { decode } from "html-entities";
 
 import { useRouter } from 'expo-router';
@@ -26,11 +26,12 @@ interface Post {
   link: string;
 }
 
+
 type ArticleScreenRouteProp = RouteProp<{ params: Post }, 'params'>;
 
 const ArticleScreen: React.FC = () => {
   const route = useRoute<ArticleScreenRouteProp>();
-
+  const navigation = useNavigation(); 
 
      //! delete later... just for debugging
     console.log(route.params); 
@@ -38,18 +39,35 @@ const ArticleScreen: React.FC = () => {
 
      //! delete later... just for debugging
     console.log("Post data received in ArticleScreen:", post_data); 
+     
+    
+    // change header back button... it used to say (tabs), ntot sure if this is a temp fix
+    useEffect(() => {
+      navigation.setOptions({
+        title: post_data.title,  
+        headerBackTitle: "Back",   
+      });
+    }, [navigation, post_data.title]);  
 
-    // helper functions to clean text... TODO: modularize into helper function
+    // helper functions to clean text... 
+    //TODO: modularize into helper function
     function stripHTMLTags(text: string): string {
       // replace <br> with new line
       // text = text.replace(/<br\s*\/?>/gi, '\n');
-
-
-      // Replace <p> and </p> with actual paragraph breaks (double newlines)
       text = text.replace(/<p\s*[^>]*>/gi, '\n');
       text = text.replace(/<\/p>/gi, '\n');
       return text.replace(/<[^>]*>/g, '');
     }
+
+
+  function formatDate(dateString: string): string {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+  }
 
     // strip HTML tags 
     function cleanTextContent(text: string): string {
@@ -75,7 +93,7 @@ const ArticleScreen: React.FC = () => {
       <Text style={styles.author}> {post_data.author?.node?.name}</Text>
 
       {/* Date */}
-      <Text style={styles.date}>{post_data.date}</Text>
+      <Text style={styles.date}>{formatDate(post_data.date)}</Text>
 
       {/* Text */}
       <View>
@@ -94,13 +112,14 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     fontFamily: "Playfair-Display",
-
+    backgroundColor: "#FFFFF",
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 8,
     fontFamily: "Playfair-Display-Bold",
+    color: "#501e4c",
 
   },
   author: {

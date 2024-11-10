@@ -76,6 +76,14 @@ const CampusStories: React.FC = () => {
     const router = useRouter();
     const navigation = useNavigation();
 
+    
+    // change header back button... it used to say (tabs), ntot sure if this is a temp fix
+    useEffect(() => {
+      navigation.setOptions({
+        title: post_data.title,  
+        headerBackTitle: "Back",   
+      });
+    }, [navigation, post_data.title]);  
 
     if (loading) return <Text>Loading...</Text>;
     if (error) return <Text>Error: {error.message}</Text>;
@@ -151,6 +159,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     margin: 10,
     position: "relative",
+    color: "#501e4c",
+
   },
   title: {
     fontSize: 24,
@@ -159,6 +169,8 @@ const styles = StyleSheet.create({
     fontFamily: "Playfair-Display-Bold",
     justifyContent: "center",
     alignSelf: "center",
+    color: "#501e4c",
+
   },
   author: {
     fontSize: 16,
