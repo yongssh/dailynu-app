@@ -1,6 +1,7 @@
 # Documentation
 
-![screenshot](dailynu-app/assets/images/screenshotdemo.png)
+<img width="429" alt="Screenshot 2024-11-10 at 3 50 00 PM" src="https://github.com/user-attachments/assets/15de059a-eecd-4387-9f5c-519d0859d8ab">
+
 Index.tsx is the home screen.
 - NewsArticleList.tsx is the current component featured here. It requests from the WPGraphQL and returns the latest stories 
 
