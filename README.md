@@ -1,6 +1,10 @@
 
 <img width="429" alt="Screenshot 2024-11-10 at 3 50 00 PM" src="https://github.com/user-attachments/assets/15de059a-eecd-4387-9f5c-519d0859d8ab">
 
+
+https://github.com/user-attachments/assets/3ce48edf-23b2-4767-9ca2-264f0e093e86
+
+
 # Documentation
 
 Index.tsx is the home screen.
